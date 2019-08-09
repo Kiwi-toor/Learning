@@ -1,12 +1,15 @@
 // IF_and_ELSE.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
+// ## TRYING TO REDUCE THE KEYSTROES
 
 #include "pch.h"
 #include <iostream>
 #include <utility>
-#include <algorithm>
-#include <vector>
+#include <bits/stdc++.h>
 
+#define LOOP(start_, end_, pas_) for(int i = start_; i < end_; i+=pas_) 
+#define ND_(name) node *name = new node;
+#define NEXT_(first, second) first->next = second;
 using namespace std;
 
 struct node {
@@ -30,7 +33,7 @@ public:
 	void createnode(int value) {
 		node *temp = new node;
 		temp->data = value;
-		temp->next = NULL;
+		NEXT_(temp, NULL);
 
 		if (head == NULL){
 			head = temp;
@@ -38,13 +41,13 @@ public:
 			temp = NULL;
 		}
 		else {
-			tail->next = temp;
+			NEXT_(tail, temp);
 			tail = temp;
 		}
 	}
 
 	void display() {
-		node *temp = new node;
+		ND_(temp);
 		temp = head;
 		while (temp != NULL) {
 			cout << temp->data << "\t";
@@ -67,9 +70,9 @@ public:
 		HEAD EQUALS TO THE NEW NODE.
 	*/
 	void insert_start(int value){
-		node *temp = new node;
+		ND_(temp);
 		temp->data = value;
-		temp->next = head;
+		NEXT_(temp, head);
 		head = temp;
 	}
 
@@ -80,18 +83,18 @@ public:
 		(B) PASS THE ADRESS OF THE CURRENT NODE IN THE NEXT FIELD OF THE NEW NODE
 	*/
 	void insert_position(int pos, int value) {
-		node *pre = new node;
-		node *cur = new node;
-		node *temp = new node;
+		ND_(pre);
+		ND_(cur);
+		ND_(temp);
 		cur = head;
 
-		for (int i = 0; i < pos; i++) {
+		LOOP(0,pos, 1) {
 			pre = cur;
 			cur = cur->next;
 		}
 		temp->data = value;
-		pre->next = temp;
-		temp->next = cur;
+		NEXT_(pre, temp);
+		NEXT_(temp, cur);
 	}
 
 	/*
@@ -101,7 +104,7 @@ public:
 		(C) DELETE THE TEMP NODE
 	*/
 	void delete_first() {
-		node *temp = new node;
+		ND_(temp);
 		temp = head;
 		head = head->next;
 		delete temp;
@@ -111,15 +114,15 @@ public:
 	2.2.. DELETION AT THE END
 	*/
 	void delete_last() {
-		node *current = new node;
-		node *previous = new node;
+		ND_(current);
+		ND_(previous);
 		current = head;
 		while (current->next != NULL) {
 			previous = current;
 			current = current->next;
 		}
 		tail = previous;
-		previous->next = NULL;
+		NEXT_(previous, NULL);
 		delete current;
 	}
 
@@ -127,10 +130,10 @@ public:
 	2.3.. DELETION AT A PARTICULAR POSITION
 	*/
 	void delete_position(int pos) {
-		node *current = new node;
-		node *previous = new node;
+		ND_(current);
+		ND_(previous);
 		current = head;
-		for (int i = 1; i < pos; i++) {
+		LOOP(1, pos, 1) {
 			previous = current;
 			current = current->next;
 		}
@@ -140,8 +143,6 @@ public:
 
 int main()
 {
-	struct V;
-
 	return 0;
 }
 
